@@ -20,8 +20,7 @@ public class GreenhouseScheduler {
   public void schedule(Runnable event, long delay) {
     scheduler.schedule(event,delay,TimeUnit.MILLISECONDS);
   }
-  public void
-  repeat(Runnable event, long initialDelay, long period) {
+  public void repeat(Runnable event, long initialDelay, long period) {
     scheduler.scheduleAtFixedRate(
       event, initialDelay, period, TimeUnit.MILLISECONDS);
   }

@@ -49,8 +49,7 @@ class Customer implements Runnable {
   private SynchronousQueue<Plate> placeSetting =
     new SynchronousQueue<Plate>();
   public Customer(WaitPerson w) { waitPerson = w; }
-  public void
-  deliver(Plate p) throws InterruptedException {
+  public void deliver(Plate p) throws InterruptedException {
     // Only blocks if customer is still
     // eating the previous course:
     placeSetting.put(p);
@@ -63,8 +62,7 @@ class Customer implements Runnable {
         // Blocks until course has been delivered:
         print(this + "eating " + placeSetting.take());
       } catch(InterruptedException e) {
-        print(this + "waiting for " +
-          course + " interrupted");
+        print(this + "waiting for " + course + " interrupted");
         break;
       }
     }
@@ -137,15 +135,12 @@ class Chef implements Runnable {
 }
 
 class Restaurant implements Runnable {
-  private List<WaitPerson> waitPersons =
-    new ArrayList<WaitPerson>();
+  private List<WaitPerson> waitPersons = new ArrayList<WaitPerson>();
   private List<Chef> chefs = new ArrayList<Chef>();
   private ExecutorService exec;
   private static Random rand = new Random(47);
-  BlockingQueue<Order>
-    orders = new LinkedBlockingQueue<Order>();
-  public Restaurant(ExecutorService e, int nWaitPersons,
-    int nChefs) {
+  BlockingQueue<Order> orders = new LinkedBlockingQueue<Order>();
+  public Restaurant(ExecutorService e, int nWaitPersons, int nChefs) {
     exec = e;
     for(int i = 0; i < nWaitPersons; i++) {
       WaitPerson waitPerson = new WaitPerson(this);
@@ -162,8 +157,7 @@ class Restaurant implements Runnable {
     try {
       while(!Thread.interrupted()) {
         // A new customer arrives; assign a WaitPerson:
-        WaitPerson wp = waitPersons.get(
-          rand.nextInt(waitPersons.size()));
+        WaitPerson wp = waitPersons.get(rand.nextInt(waitPersons.size()));
         Customer c = new Customer(wp);
         exec.execute(c);
         TimeUnit.MILLISECONDS.sleep(100);

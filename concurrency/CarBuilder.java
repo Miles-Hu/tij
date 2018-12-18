@@ -129,8 +129,7 @@ abstract class Robot implements Runnable {
     }
     print(this + " off");
   }
-  private synchronized void
-  powerDown() throws InterruptedException {
+  private synchronized void powerDown() throws InterruptedException {
     engage = false;
     assembler = null; // Disconnect from the Assembler
     // Put ourselves back in the available pool:
@@ -172,9 +171,7 @@ class RobotPool {
     pool.add(r);
     notifyAll();
   }
-  public synchronized void
-  hire(Class<? extends Robot> robotType, Assembler d)
-  throws InterruptedException {
+  public synchronized void hire(Class<? extends Robot> robotType, Assembler d) throws InterruptedException {
     for(Robot r : pool)
       if(r.getClass().equals(robotType)) {
         pool.remove(r);
@@ -197,8 +194,7 @@ public class CarBuilder {
     exec.execute(new EngineRobot(robotPool));
     exec.execute(new DriveTrainRobot(robotPool));
     exec.execute(new WheelRobot(robotPool));
-    exec.execute(new Assembler(
-      chassisQueue, finishingQueue, robotPool));
+    exec.execute(new Assembler(chassisQueue, finishingQueue, robotPool));
     exec.execute(new Reporter(finishingQueue));
     // Start everything running by producing chassis:
     exec.execute(new ChassisBuilder(chassisQueue));

@@ -25,18 +25,15 @@ public class ProcessFiles {
             // Allow user to leave off extension:
             if(!arg.endsWith("." + ext))
               arg += "." + ext;
-            strategy.process(
-              new File(arg).getCanonicalFile());
+            strategy.process(new File(arg).getCanonicalFile());
           }
         }
     } catch(IOException e) {
       throw new RuntimeException(e);
     }
   }
-  public void
-  processDirectoryTree(File root) throws IOException {
-    for(File file : Directory.walk(
-        root.getAbsolutePath(), ".*\\." + ext))
+  public void processDirectoryTree(File root) throws IOException {
+    for(File file : Directory.walk(root.getAbsolutePath(), ".*\\." + ext))
       strategy.process(file.getCanonicalFile());
   }
   // Demonstration of how to use it:

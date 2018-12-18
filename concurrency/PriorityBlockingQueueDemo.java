@@ -56,10 +56,10 @@ Runnable, Comparable<PrioritizedTask>  {
 
 class PrioritizedTaskProducer implements Runnable {
   private Random rand = new Random(47);
-  private Queue<Runnable> queue;
+  private PriorityBlockingQueue<Runnable> queue;
   private ExecutorService exec;
   public PrioritizedTaskProducer(
-    Queue<Runnable> q, ExecutorService e) {
+    PriorityBlockingQueue<Runnable> q, ExecutorService e) {
     queue = q;
     exec = e; // Used for EndSentinel
   }
@@ -67,20 +67,20 @@ class PrioritizedTaskProducer implements Runnable {
     // Unbounded queue; never blocks.
     // Fill it up fast with random priorities:
     for(int i = 0; i < 20; i++) {
-      queue.add(new PrioritizedTask(rand.nextInt(10)));
+      queue.put(new PrioritizedTask(rand.nextInt(10)));
       Thread.yield();
     }
     // Trickle in highest-priority jobs:
     try {
       for(int i = 0; i < 10; i++) {
         TimeUnit.MILLISECONDS.sleep(250);
-        queue.add(new PrioritizedTask(10));
+        queue.put(new PrioritizedTask(10));
       }
       // Add jobs, lowest priority first:
       for(int i = 0; i < 10; i++)
-        queue.add(new PrioritizedTask(i));
+        queue.put(new PrioritizedTask(i));
       // A sentinel to stop all the tasks:
-      queue.add(new PrioritizedTask.EndSentinel(exec));
+      queue.put(new PrioritizedTask.EndSentinel(exec));
     } catch(InterruptedException e) {
       // Acceptable way to exit
     }

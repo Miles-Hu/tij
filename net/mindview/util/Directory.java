@@ -8,8 +8,7 @@ import java.io.*;
 import java.util.*;
 
 public final class Directory {
-  public static File[]
-  local(File dir, final String regex) {
+  public static File[] local(File dir, final String regex) {
     return dir.listFiles(new FilenameFilter() {
       private Pattern pattern = Pattern.compile(regex);
       public boolean accept(File dir, String name) {
@@ -18,8 +17,7 @@ public final class Directory {
       }
     });
   }
-  public static File[]
-  local(String path, final String regex) { // Overloaded
+  public static File[] local(String path, final String regex) { // Overloaded
     return local(new File(path), regex);
   }
   // A two-tuple for returning a pair of objects:
@@ -39,12 +37,10 @@ public final class Directory {
         "\n\nfiles: " + PPrint.pformat(files);
     }
   }
-  public static TreeInfo
-  walk(String start, String regex) { // Begin recursion
+  public static TreeInfo walk(String start, String regex) { // Begin recursion
     return recurseDirs(new File(start), regex);
   }
-  public static TreeInfo
-  walk(File start, String regex) { // Overloaded
+  public static TreeInfo walk(File start, String regex) { // Overloaded
     return recurseDirs(start, regex);
   }
   public static TreeInfo walk(File start) { // Everything
