@@ -17,16 +17,13 @@ public abstract class Tester<C> {
   volatile long readTime = 0;
   volatile long writeTime = 0;
   CountDownLatch endLatch;
-  static ExecutorService exec =
-    Executors.newCachedThreadPool();
+  static ExecutorService exec = Executors.newCachedThreadPool();
   Integer[] writeData;
   Tester(String testId, int nReaders, int nWriters) {
-    this.testId = testId + " " +
-      nReaders + "r " + nWriters + "w";
+    this.testId = testId + " " + nReaders + "r " + nWriters + "w";
     this.nReaders = nReaders;
     this.nWriters = nWriters;
-    writeData = Generated.array(Integer.class,
-      new RandomGenerator.Integer(), containerSize);
+    writeData = Generated.array(Integer.class, new RandomGenerator.Integer(), containerSize);
     for(int i = 0; i < testReps; i++) {
       runTest();
       readTime = 0;

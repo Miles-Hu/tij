@@ -4,7 +4,7 @@ import net.mindview.util.*;
 
 public class OSExecuteDemo {
   public static void main(String[] args) {
-    OSExecute.command("javap OSExecuteDemo");
+    OSExecute.command("javap /home/miles/learning/java/thinking_in_java/target/classes/io/OSExecuteDemo.class");
   }
 } /* Output:
 Compiled from "OSExecuteDemo.java"

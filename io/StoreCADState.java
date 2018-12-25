@@ -69,8 +69,7 @@ class Line extends Shape {
 
 public class StoreCADState {
   public static void main(String[] args) throws Exception {
-    List<Class<? extends Shape>> shapeTypes =
-      new ArrayList<Class<? extends Shape>>();
+    List<Class<? extends Shape>> shapeTypes = new ArrayList<Class<? extends Shape>>();
     // Add references to the class objects:
     shapeTypes.add(Circle.class);
     shapeTypes.add(Square.class);
@@ -83,8 +82,7 @@ public class StoreCADState {
     for(int i = 0; i < 10; i++)
       ((Shape)shapes.get(i)).setColor(Shape.GREEN);
     // Save the state vector:
-    ObjectOutputStream out = new ObjectOutputStream(
-      new FileOutputStream("CADState.out"));
+    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("CADState.out"));
     out.writeObject(shapeTypes);
     Line.serializeStaticState(out);
     out.writeObject(shapes);
