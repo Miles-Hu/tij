@@ -1,5 +1,6 @@
 package aaa.kafka.consumer;
 
+import org.apache.kafka.clients.consumer.CommitFailedException;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -22,6 +23,7 @@ public class Consumer1 {
         props.put("group.id", "miles");
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put("enable.auto.commit", "false");
         consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singleton("test2"));
     }
@@ -34,6 +36,11 @@ public class Consumer1 {
                 for (ConsumerRecord<String, String> r : records) {
                     System.out.printf("topic = %s, partition = %s, offset = %d, key = %s, value = %s \n",
                                         r.topic(),r.partition(),r.offset(),r.key(),r.value());
+                }
+                try {
+                    consumer.commitSync();
+                } catch (CommitFailedException e) {
+                    e.printStackTrace();
                 }
             }
         }finally {

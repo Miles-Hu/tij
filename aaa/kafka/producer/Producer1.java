@@ -31,7 +31,7 @@ public class Producer1 {
     @Test
     public void sync() {
         try {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 1010; i < 1020; i++) {
                 ProducerRecord<String, String> record = new ProducerRecord<>("test2", null, "Hello, Dear"+i);
                 RecordMetadata recordMetadata = producer.send(record).get();
                 System.out.println(recordMetadata.toString());
