@@ -72,8 +72,8 @@ public class HorseRace {
     }
   }
   public static void main(String[] args) {
-    int nHorses = 7;
-    int pause = 2200;
+    int nHorses = 2;
+    int pause = 1000;
     if(args.length > 0) { // Optional argument
       int n = new Integer(args[0]);
       nHorses = n > 0 ? n : nHorses;

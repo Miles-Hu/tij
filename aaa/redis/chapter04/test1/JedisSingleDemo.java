@@ -10,11 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Miles Hoo
- * @version v1.0.0
- * @since 18-12-28 下午11:15
- */
 public class JedisSingleDemo {
 
     Jedis jedis = new Jedis("127.0.0.1", 6379);

@@ -68,8 +68,8 @@ public class ExchangerDemo {
       BasicGenerator.create(Fat.class), producerList));
     exec.execute(
       new ExchangerConsumer<Fat>(xc,consumerList));
-    TimeUnit.SECONDS.sleep(delay);
-    exec.shutdownNow();
+    //TimeUnit.SECONDS.sleep(delay);
+    //exec.shutdownNow();
   }
 } /* Output: (Sample)
 Final value: Fat id: 29999
